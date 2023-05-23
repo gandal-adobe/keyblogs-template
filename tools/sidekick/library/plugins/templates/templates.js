@@ -16,7 +16,7 @@ export async function fetchTemplate(path) {
     window.templates = {};
   }
   if (!window.templates[path]) {
-    const resp = await fetch(`${path}?view-doc-source=true`);
+    const resp = await fetch(`${path}.plain.html`);
     if (!resp.ok) return '';
 
     const html = await resp.text();
@@ -28,9 +28,34 @@ export async function fetchTemplate(path) {
   return window.templates[path];
 }
 
-function processMarkup(pageTemplate, path) {
+function createTable(block, name, path) {
+  decorateImages(block, path);
+  const rows = [...block.children];
+  const maxCols = rows.reduce((cols, row) => (
+    row.children.length > cols ? row.children.length : cols), 0);
+  const table = document.createElement('table');
+  table.setAttribute('border', 1);
+  const headerRow = document.createElement('tr');
+  headerRow.append(createTag('th', { colspan: maxCols }, name));
+  table.append(headerRow);
+  rows.forEach((row) => {
+    const tr = document.createElement('tr');
+    [...row.children].forEach((col) => {
+      const td = document.createElement('td');
+      if (row.children.length < maxCols) {
+        td.setAttribute('colspan', maxCols);
+      }
+      td.innerHTML = col.innerHTML;
+      tr.append(td);
+    });
+    table.append(tr);
+  });
+  return table.outerHTML;
+}
+
+function decorateImages(templateSection, path) {
   const url = new URL(path);
-  pageTemplate.querySelectorAll('img').forEach((img) => {
+  templateSection.querySelectorAll('img').forEach((img) => {
     const srcSplit = img.src.split('/');
     const mediaPath = srcSplit.pop();
     img.src = `${url.origin}/${mediaPath}`;
@@ -40,7 +65,35 @@ function processMarkup(pageTemplate, path) {
     img.height = height * ratio;
   });
 
-  return [pageTemplate.innerHTML];
+  return [templateSection.innerHTML];
+}
+
+function createSection(section, path) {
+  decorateImages(section, path);
+  let output = '';
+  [...section.children].forEach((row) => {
+    if (row.nodeName === 'DIV') {
+      const blockName = row.classList[0];
+      output = output.concat(createTable(row, blockName, path));
+    } else {
+      output = output.concat(row.outerHTML);
+    }
+  });
+  return output;
+}
+
+function processMarkup(template, path) {
+  decorateImages(template, path);
+  let output = '';
+  [...template.children].forEach((row, i) => {
+    if (row.nodeName === 'DIV') {
+      if (i > 0) output = output.concat('---');
+      output = output.concat(createSection(row, path));
+    } else {
+      output = output.concat(row.outerHTML);
+    }
+  });
+  return output;
 }
 
 /**
