@@ -66,29 +66,6 @@ export async function decorate(container, data, _query) {
       const templateVariant = createElement('sp-sidenav-item', '', { label: name, preview: false });
       sideNav.append(templateVariant);
 
-      /*
-      const pageBlocks = res.body.querySelectorAll(':scope > div');
-      const blockVariant = createElement('sp-sidenav-item', '', { label: name, preview: false });
-      sideNav.append(blockVariant);
-
-      pageBlocks.forEach((pageBlock) => {
-        let blockName = name;
-        let blockDescription = '';
-        const info = pageBlock.querySelector('div.block-info');
-        if (info) {
-          [...info.children].forEach((row) => {
-            const cols = [...row.children];
-            if (cols[0].textContent.toLowerCase() === 'name') {
-              blockName = cols[1].textContent;
-            }
-            if (cols[0].textContent.toLowerCase() === 'description') {
-              blockDescription = cols[1].textContent;
-            }
-          });
-          info.remove();
-        }
-        */
-
       const childNavItem = createElement('sp-sidenav-item', '', { label: name, 'data-testid': 'item' });
       childNavItem.setAttribute('data-info', name); // TBD: this is template description
       templateVariant.append(childNavItem);
