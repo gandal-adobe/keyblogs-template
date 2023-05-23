@@ -28,7 +28,18 @@ export async function fetchTemplate(path) {
   return window.templates[path];
 }
 
-function processMarkup(pageTemplate) {
+function processMarkup(pageTemplate, path) {
+  const url = new URL(path);
+  pageTemplate.querySelectorAll('img').forEach((img) => {
+    const srcSplit = img.src.split('/');
+    const mediaPath = srcSplit.pop();
+    img.src = `${url.origin}/${mediaPath}`;
+    const { width, height } = img;
+    const ratio = 1;
+    img.width = width * ratio;
+    img.height = height * ratio;
+  });
+
   return [pageTemplate.innerHTML];
 }
 
@@ -83,7 +94,7 @@ export async function decorate(container, data, _query) {
       templateVariant.append(childNavItem);
 
       childNavItem.addEventListener('click', () => {
-        const blob = new Blob(processMarkup(res.body), { type: 'text/html' });
+        const blob = new Blob(processMarkup(res.body, path), { type: 'text/html' });
         createCopy(blob);
 
         // Show toast
