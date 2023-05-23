@@ -16,7 +16,7 @@ export async function fetchTemplate(path) {
     window.templates = {};
   }
   if (!window.templates[path]) {
-    const resp = await fetch(`${path}.plain.html`);
+    const resp = await fetch(`${path}?view-doc-source=true`);
     if (!resp.ok) return '';
 
     const html = await resp.text();
