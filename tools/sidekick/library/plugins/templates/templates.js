@@ -137,6 +137,7 @@ function processMarkup(template, path) {
     }
   });
   // process template head to derive meta tags
+  output = output.concat('---');
   output = output.concat(createMetadataTable(template.head, path));
 
   return output;
