@@ -97,14 +97,14 @@ function createMetadataTable(headSection, path) {
   table.append(headerRow);
   headSection.querySelectorAll('meta').forEach((row) => {
     const tr = document.createElement('tr');
-    [...row.children].forEach((col) => {
-      const td = document.createElement('td');
-      if (row.children.length < maxCols) {
-        td.setAttribute('colspan', maxCols);
-      }
-      td.innerHTML = col.innerHTML;
-      tr.append(td);
-    });
+    const tdName = document.createElement('td');
+    //tdName.setAttribute('colspan', maxCols);
+    tdName.innerHTML = row.getAttribute('name');
+    tr.append(tdName);
+    const tdValue = document.createElement('td');
+    //tdName.setAttribute('colspan', maxCols);
+    tdValue.innerHTML = row.getAttribute('content');
+    tr.append(tdValue);
     table.append(tr);
   });
   return table.outerHTML;
