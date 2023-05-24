@@ -45,6 +45,21 @@ function createTag(tag, attributes = {}, html = undefined) {
   return el;
 }
 
+function decorateImages(templateSection, path) {
+  const url = new URL(path);
+  templateSection.querySelectorAll('img').forEach((img) => {
+    const srcSplit = img.src.split('/');
+    const mediaPath = srcSplit.pop();
+    img.src = `${url.origin}/${mediaPath}`;
+    const { width, height } = img;
+    const ratio = 1;
+    img.width = width * ratio;
+    img.height = height * ratio;
+  });
+
+  return [templateSection.innerHTML];
+}
+
 function createTable(block, name, path) {
   decorateImages(block, path);
   const rows = [...block.children];
@@ -70,19 +85,29 @@ function createTable(block, name, path) {
   return table.outerHTML;
 }
 
-function decorateImages(templateSection, path) {
-  const url = new URL(path);
-  templateSection.querySelectorAll('img').forEach((img) => {
-    const srcSplit = img.src.split('/');
-    const mediaPath = srcSplit.pop();
-    img.src = `${url.origin}/${mediaPath}`;
-    const { width, height } = img;
-    const ratio = 1;
-    img.width = width * ratio;
-    img.height = height * ratio;
+function createMetadataTable(headSection, path) {
+  //  headSection is res.head
+  decorateImages(headSection, path);
+  //const rows = [...block.children];
+  const maxCols = 2;
+  const table = document.createElement('table');
+  table.setAttribute('border', 1);
+  const headerRow = document.createElement('tr');
+  headerRow.append(createTag('th', { colspan: maxCols }, 'metadata'));
+  table.append(headerRow);
+  headSection.querySelectorAll('meta').forEach((row) => {
+    const tr = document.createElement('tr');
+    [...row.children].forEach((col) => {
+      const td = document.createElement('td');
+      if (row.children.length < maxCols) {
+        td.setAttribute('colspan', maxCols);
+      }
+      td.innerHTML = col.innerHTML;
+      tr.append(td);
+    });
+    table.append(tr);
   });
-
-  return [templateSection.innerHTML];
+  return table.outerHTML;
 }
 
 function createSection(section, path) {
@@ -102,7 +127,8 @@ function createSection(section, path) {
 function processMarkup(template, path) {
   decorateImages(template, path);
   let output = '';
-  template.querySelector("main").querySelectorAll(":scope > div").forEach((row, i) => { 
+    // process template body
+  template.body.querySelector('main').querySelectorAll(':scope > div').forEach((row, i) => {
     if (row.nodeName === 'DIV') {
       if (i > 0) output = output.concat('---');
       output = output.concat(createSection(row, path));
@@ -110,6 +136,9 @@ function processMarkup(template, path) {
       output = output.concat(row.outerHTML);
     }
   });
+  // process template head to derive meta tags
+  output = output.concat(createMetadataTable(template.head, path));
+
   return output;
 }
 
@@ -141,7 +170,7 @@ export async function decorate(container, data, _query) {
       templateVariant.append(childNavItem);
 
       childNavItem.addEventListener('click', () => {
-        const blobInput = processMarkup(res.body, path);
+        const blobInput = processMarkup(res, path);
         const blob = new Blob([blobInput], { type: 'text/html' });
         createCopy(blob);
 
