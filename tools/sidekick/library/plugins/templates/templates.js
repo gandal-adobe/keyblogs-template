@@ -92,6 +92,7 @@ function createMetadataTable(headSection, path) {
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
+  table.setAttribute('width','min-content');
   const headerRow = document.createElement('tr');
   headerRow.append(createTag('th', { colspan: maxCols }, 'metadata'));
   table.append(headerRow);
