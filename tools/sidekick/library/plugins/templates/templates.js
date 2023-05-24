@@ -101,7 +101,7 @@ function createMetadataTable(headSection, path) {
     if (metaTagValue !== undefined) {
       const tr = document.createElement('tr');
       const tdName = document.createElement('td');
-      tdName.setAttribute('width','min-content');
+      tdName.setAttribute('width','200px');
       tdName.innerText = metaTagValue;
       tr.append(tdName);
     
