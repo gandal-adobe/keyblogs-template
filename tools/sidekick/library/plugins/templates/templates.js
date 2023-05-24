@@ -103,7 +103,7 @@ function createMetadataTable(headSection, path) {
     
     const tdValue = document.createElement('td');
     //tdName.setAttribute('colspan', maxCols);
-    tdValue.innerHTML = row.getAttribute('content');
+    tdValue.innerText = row.getAttribute('content');
     tr.append(tdValue);
     table.append(tr);
   });
