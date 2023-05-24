@@ -101,11 +101,11 @@ function createMetadataTable(headSection, path) {
     if (metaTagValue !== undefined) {
       const tr = document.createElement('tr');
       const tdName = document.createElement('td');
+      tdName.setAttribute('width','min-content');
       tdName.innerText = metaTagValue;
       tr.append(tdName);
     
       const tdValue = document.createElement('td');
-      tdValue.setAttribute('width','min-content');
       tdValue.innerText = row.getAttribute('content');
       if (metaTagValue === 'Tags') {
         tdValue.innerText = tdValue.innerText.replace(';', ',');
