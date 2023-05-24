@@ -86,8 +86,8 @@ function createTable(block, name, path) {
 }
 
 function createMetadataTable(headSection, path) {
-  //  headSection is res.head
   decorateImages(headSection, path);
+  const validMetaMap = { 'template':'template', 'og:title':'Title', 'description':'Description', 'author':'Author', 'article:tag':'Tags', 'publication-date':'Publication Date', 'read-time':'Read Time'};
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
@@ -95,18 +95,22 @@ function createMetadataTable(headSection, path) {
   headerRow.append(createTag('th', { colspan: maxCols }, 'metadata'));
   table.append(headerRow);
   headSection.querySelectorAll('meta').forEach((row) => {
-    const tr = document.createElement('tr');
-    const tdName = document.createElement('td');
-    //tdName.setAttribute('colspan', maxCols);
-    tdName.innerText = row.getAttributeNames()[0]==='property' ? row.getAttribute('property') : row.getAttribute('name');
-    tr.append(tdName);
+    const headMetaTag = row.getAttributeNames()[0]==='property' ? row.getAttribute('property') : row.getAttribute('name');
+    const metaTagValue = validMetaMap[headMetaTag];
+    if (!metaTagValue === undefined) {
+      // ignore if header metatag is not in map; else get equivalent doc tag
+      const tr = document.createElement('tr');
+      const tdName = document.createElement('td');
+      tdName.innerText = metaTagValue;
+      tr.append(tdName);
     
-    const tdValue = document.createElement('td');
-    //tdName.setAttribute('colspan', maxCols);
-    tdValue.innerText = row.getAttribute('content');
-    tr.append(tdValue);
-    table.append(tr);
+      const tdValue = document.createElement('td');
+      tdValue.innerText = row.getAttribute('content');
+      tr.append(tdValue);
+      table.append(tr);
+    }
   });
+
   return table.outerHTML;
 }
 
@@ -137,7 +141,6 @@ function processMarkup(template, path) {
     }
   });
   // process template head to derive meta tags
-  output = output.concat('<p/>');
   output = output.concat(createMetadataTable(template.head, path));
 
   return output;
