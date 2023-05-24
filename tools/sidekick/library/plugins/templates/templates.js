@@ -87,7 +87,8 @@ function createTable(block, name, path) {
 
 function createMetadataTable(headSection, path) {
   decorateImages(headSection, path);
-  const validMetaMap = { 'template':'template', 'og:title':'Title', 'description':'Description', 'author':'Author', 'article:tag':'Tags', 'publication-date':'Publication Date', 'read-time':'Read Time'};
+  // meta tags to include and their docx translation
+  const validMetaMap = { 'template':'Template', 'og:title':'Title', 'description':'Description', 'og:Image':'Image', 'author':'Author', 'article:tag':'Tags', 'publication-date':'Publication Date', 'read-time':'Read Time'};
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
@@ -98,7 +99,6 @@ function createMetadataTable(headSection, path) {
     const headMetaTag = row.getAttributeNames()[0]==='property' ? row.getAttribute('property') : row.getAttribute('name');
     const metaTagValue = validMetaMap[headMetaTag];
     if (metaTagValue !== undefined) {
-      // ignore if header metatag is not in map; else get equivalent doc tag
       const tr = document.createElement('tr');
       const tdName = document.createElement('td');
       tdName.innerText = metaTagValue;
@@ -106,6 +106,9 @@ function createMetadataTable(headSection, path) {
     
       const tdValue = document.createElement('td');
       tdValue.innerText = row.getAttribute('content');
+      if (metaTagValue === 'Tags') {
+        tdValue.innerText.replace(';', ',');
+      }
       tr.append(tdValue);
       table.append(tr);
     }
