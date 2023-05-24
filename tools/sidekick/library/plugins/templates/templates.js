@@ -97,7 +97,7 @@ function createMetadataTable(headSection, path) {
   headSection.querySelectorAll('meta').forEach((row) => {
     const headMetaTag = row.getAttributeNames()[0]==='property' ? row.getAttribute('property') : row.getAttribute('name');
     const metaTagValue = validMetaMap[headMetaTag];
-    if (!metaTagValue === undefined) {
+    if (metaTagValue !== undefined) {
       // ignore if header metatag is not in map; else get equivalent doc tag
       const tr = document.createElement('tr');
       const tdName = document.createElement('td');
