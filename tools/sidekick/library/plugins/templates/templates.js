@@ -102,7 +102,7 @@ function createSection(section, path) {
 function processMarkup(template, path) {
   decorateImages(template, path);
   let output = '';
-  [...template.children].forEach((row, i) => {
+  template.querySelector("main").querySelectorAll(":scope > div").forEach((row, i) => { 
     if (row.nodeName === 'DIV') {
       if (i > 0) output = output.concat('---');
       output = output.concat(createSection(row, path));
