@@ -92,7 +92,6 @@ function createMetadataTable(headSection, path) {
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
-  table.setAttribute('width','min-content');
   const headerRow = document.createElement('tr');
   headerRow.append(createTag('th', { colspan: maxCols }, 'metadata'));
   table.append(headerRow);
@@ -106,6 +105,7 @@ function createMetadataTable(headSection, path) {
       tr.append(tdName);
     
       const tdValue = document.createElement('td');
+      tdValue.setAttribute('width','min-content');
       tdValue.innerText = row.getAttribute('content');
       if (metaTagValue === 'Tags') {
         tdValue.innerText = tdValue.innerText.replace(';', ',');
