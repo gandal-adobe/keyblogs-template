@@ -107,8 +107,7 @@ function createMetadataTable(headSection, path) {
     tr.append(tdValue);
     table.append(tr);
   });
-  const metadataHTML = '<div>'.concat(table.outerHTML.concat('</div)'));
-  return metadataHTML;
+  return table.outerHTML;
 }
 
 function createSection(section, path) {
