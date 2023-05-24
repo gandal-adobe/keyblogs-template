@@ -88,7 +88,9 @@ function createTable(block, name, path) {
 function createMetadataTable(headSection, path) {
   decorateImages(headSection, path);
   // meta tags to include and their docx translation
-  const validMetaMap = { 'template':'Template', 'og:title':'Title', 'description':'Description', 'og:image':'Image', 'author':'Author', 'article:tag':'Tags', 'publication-date':'Publication Date', 'read-time':'Read Time'};
+  const validMetaMap = {
+    template: 'Template', 'og:title': 'Title', description: 'Description', 'og:image': 'Image', author: 'Author', 'article:tag': 'Tags', 'publication-date': 'Publication Date', 'read-time': 'Read Time',
+  };
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
@@ -96,15 +98,13 @@ function createMetadataTable(headSection, path) {
   headerRow.append(createTag('th', { colspan: maxCols }, 'metadata'));
   table.append(headerRow);
   headSection.querySelectorAll('meta').forEach((row) => {
-    const headMetaTag = row.getAttributeNames()[0]==='property' ? row.getAttribute('property') : row.getAttribute('name');
+    const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
     const metaTagValue = validMetaMap[headMetaTag];
     if (metaTagValue !== undefined) {
       const tr = document.createElement('tr');
       const tdName = document.createElement('td');
-      tdName.setAttribute('style','white-space: nowrap;');
       tdName.innerText = metaTagValue;
       tr.append(tdName);
-    
       const tdValue = document.createElement('td');
       tdValue.innerText = row.getAttribute('content');
       if (metaTagValue === 'Tags') {
@@ -135,7 +135,7 @@ function createSection(section, path) {
 function processMarkup(template, path) {
   decorateImages(template, path);
   let output = '';
-    // process template body
+  // process template body
   template.body.querySelector('main').querySelectorAll(':scope > div').forEach((row, i) => {
     if (row.nodeName === 'DIV') {
       if (i > 0) output = output.concat('---');
