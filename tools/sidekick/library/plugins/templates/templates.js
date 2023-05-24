@@ -88,7 +88,6 @@ function createTable(block, name, path) {
 function createMetadataTable(headSection, path) {
   //  headSection is res.head
   decorateImages(headSection, path);
-  //const rows = [...block.children];
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
@@ -99,15 +98,17 @@ function createMetadataTable(headSection, path) {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
     //tdName.setAttribute('colspan', maxCols);
-    tdName.innerHTML = row.getAttribute('name');
+    tdName.innerHTML = row.getAttributeNames()[0]==='property' ? row.getAttribute('property') : row.getAttribute('name');
     tr.append(tdName);
+    
     const tdValue = document.createElement('td');
     //tdName.setAttribute('colspan', maxCols);
     tdValue.innerHTML = row.getAttribute('content');
     tr.append(tdValue);
     table.append(tr);
   });
-  return table.outerHTML;
+  const metadataHTML = '<div>'.concat(table.outerHTML.concat('</div)'));
+  return metadataHTML;
 }
 
 function createSection(section, path) {
