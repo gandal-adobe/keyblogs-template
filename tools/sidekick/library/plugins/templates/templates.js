@@ -107,7 +107,7 @@ function createMetadataTable(headSection, path) {
       const tdValue = document.createElement('td');
       tdValue.innerText = row.getAttribute('content');
       if (metaTagValue === 'Tags') {
-        tdValue.innerText.replace(';', ',');
+        tdValue.innerText = tdValue.innerText.replace(';', ',');
       }
       tr.append(tdValue);
       table.append(tr);
