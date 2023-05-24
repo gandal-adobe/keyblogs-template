@@ -88,7 +88,7 @@ function createTable(block, name, path) {
 function createMetadataTable(headSection, path) {
   decorateImages(headSection, path);
   // meta tags to include and their docx translation
-  const validMetaMap = { 'template':'Template', 'og:title':'Title', 'description':'Description', 'og:Image':'Image', 'author':'Author', 'article:tag':'Tags', 'publication-date':'Publication Date', 'read-time':'Read Time'};
+  const validMetaMap = { 'template':'Template', 'og:title':'Title', 'description':'Description', 'og:image':'Image', 'author':'Author', 'article:tag':'Tags', 'publication-date':'Publication Date', 'read-time':'Read Time'};
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
@@ -144,7 +144,6 @@ function processMarkup(template, path) {
     }
   });
   // process template head to derive meta tags
-  output = output.concat('<br/>');
   output = output.concat(createMetadataTable(template.head, path));
 
   return output;
