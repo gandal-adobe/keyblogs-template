@@ -98,7 +98,7 @@ function createMetadataTable(headSection, path) {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
     //tdName.setAttribute('colspan', maxCols);
-    tdName.innerHTML = row.getAttributeNames()[0]==='property' ? row.getAttribute('property') : row.getAttribute('name');
+    tdName.innerText = row.getAttributeNames()[0]==='property' ? row.getAttribute('property') : row.getAttribute('name');
     tr.append(tdName);
     
     const tdValue = document.createElement('td');
