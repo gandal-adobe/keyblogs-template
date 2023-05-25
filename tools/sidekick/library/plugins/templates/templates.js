@@ -68,7 +68,7 @@ function createTable(block, name, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols }, name));
+  headerRow.append(createTag('th', { colspan: maxCols, align: 'left'  }, name));
   table.append(headerRow);
   rows.forEach((row) => {
     const tr = document.createElement('tr');
@@ -91,6 +91,7 @@ function createMetadataTable(headSection, path) {
   const validMetaMap = {
     template: 'Template', 'og:title': 'Title', description: 'Description', 'og:image': 'Image', author: 'Author', 'article:tag': 'Tags', 'publication-date': 'Publication Date', 'read-time': 'Read Time',
   };
+  // stuff relevant template meta tags into array
   let metadataArray = new Array();
   headSection.querySelectorAll('meta').forEach((row) => {
     const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
@@ -100,7 +101,7 @@ function createMetadataTable(headSection, path) {
       metadataArray.push(metaObj);
     }
   });
-  console.log(metadataArray);
+  // resolve duplicates
   const compactedMetaArray = Array.from(new Set(metadataArray.map(set => set.attrib)))
   .map(attrib => {
     return {
@@ -113,7 +114,8 @@ function createMetadataTable(headSection, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, 'metadata'));
+  headerRow.append(createTag('th', { colspan: maxCols, align: 'left'  }, 'metadata'));
+  headerRow.style.backgroundColor = yellow;
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
       const tr = document.createElement('tr');
