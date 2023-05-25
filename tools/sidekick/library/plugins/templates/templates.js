@@ -113,7 +113,7 @@ function createMetadataTable(headSection, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols }, 'metadata'));
+  headerRow.append(createTag('th', { colspan: maxCols, align: left }, 'metadata'));
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
       const tr = document.createElement('tr');
