@@ -115,7 +115,7 @@ function createMetadataTable(headSection, path) {
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
   headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color:#f4cccd;' }, 'metadata'));
-  headerRow.style.textAlign = 'left';
+  headerRow.style.align = 'left';
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
     const tr = document.createElement('tr');
