@@ -44,7 +44,7 @@ function createTag(tag, attributes = {}, html = undefined) {
       el.setAttribute(key, val);
     });
   }
-  el.style.color = 'blue';
+  //el.style.color = 'blue';
   return el;
 }
 
@@ -72,10 +72,9 @@ function createTable(block, name, path) {
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
   headerRow.style.backgroundColor = blockHeaderBGColor;
-  headerRow.append(createTag('th', { colspan: maxCols, backgroundColor: blockHeaderBGColor }, name));
+  headerRow.append(createTag('th', { colspan: maxCols, style: 'color :' + blockHeaderBGColor }, name));
   //headerRow.style.backgroundColor = blockHeaderBGColor;
   //headerRow.backgroundColor = blockHeaderBGColor;
-  headerRow.style.color = 'green';
   table.append(headerRow);
   rows.forEach((row) => {
     const tr = document.createElement('tr');
