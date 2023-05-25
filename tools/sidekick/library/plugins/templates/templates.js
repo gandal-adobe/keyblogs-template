@@ -83,7 +83,6 @@ function createTable(block, name, path) {
         td.setAttribute('colspan', maxCols);
       }
       td.innerHTML = col.innerHTML;
-      td.
       tr.append(td);
     });
     table.append(tr);
