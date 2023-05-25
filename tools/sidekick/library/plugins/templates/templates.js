@@ -96,11 +96,18 @@ function createMetadataTable(headSection, path) {
     const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
     const metaTagValue = validMetaMap[headMetaTag];
     if (metaTagValue !== undefined) {
-      const metaObj = { 'attrib':metaTagValue, 'value':row.getAttribute('content') }; 
+      const metaObj = { 'label':metaTagValue, 'data':row.getAttribute('content') }; 
       metadataArray.push(metaObj);
     }
   });
   console.log(metadataArray);
+  const compactedMetaArray = Array.from(new Set(metadataArray.map(set => set.attrib)))
+  .map(attrib => {
+    return {
+      attrib: attrib,
+      value: metadataArray.filter(set => set.attrib === attrib).map(attrib => attrib.value).join(', ')
+    }
+  });
 
   const maxCols = 2;
   const table = document.createElement('table');
