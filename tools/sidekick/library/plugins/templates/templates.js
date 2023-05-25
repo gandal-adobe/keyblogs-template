@@ -70,6 +70,7 @@ function createTable(block, name, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
+  headerRow.style.backgroundColor = blockHeaderBGColor;
   headerRow.append(createTag('th', { colspan: maxCols, backgroundColor: blockHeaderBGColor }, name));
   //headerRow.style.backgroundColor = blockHeaderBGColor;
   //headerRow.backgroundColor = blockHeaderBGColor;
@@ -118,6 +119,7 @@ function createMetadataTable(headSection, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
+  headerRow.style.backgroundColor = 'blue';
   headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, 'metadata'));
   headerRow.style.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
