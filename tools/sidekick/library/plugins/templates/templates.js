@@ -119,7 +119,6 @@ function createMetadataTable(headSection, path) {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
     tdName.innerText = row.attrib;
-    tdName.style.width = '300px';
     tr.append(tdName);
     const tdValue = document.createElement('td');
     tdValue.innerText = row.value;
