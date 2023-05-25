@@ -42,7 +42,7 @@ function createTag(tag, attributes = {}, html = undefined) {
       el.setAttribute(key, val);
     });
   }
-  //el.style.backgroundColor = 'orange';
+  el.style.textAlign = 'left';
   return el;
 }
 
@@ -69,7 +69,7 @@ function createTable(block, name, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols, style: 'align:start; background-color:#f4cccd;' }, name));
+  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color:#f4cccd;' }, name));
   table.append(headerRow);
   rows.forEach((row) => {
     const tr = document.createElement('tr');
