@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import { createElement, createCopy } from '../utils/utils.js';
 
 const blockHeaderBGColor = '#f4cccd';
@@ -71,9 +70,10 @@ function createTable(block, name, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols, align: 'left', style: 'background-color:red' }, name));
+  headerRow.append(createTag('th', { colspan: maxCols, backgroundColor: blockHeaderBGColor }, name));
   //headerRow.style.backgroundColor = blockHeaderBGColor;
   //headerRow.backgroundColor = blockHeaderBGColor;
+  headerRow.
   table.append(headerRow);
   rows.forEach((row) => {
     const tr = document.createElement('tr');
@@ -83,6 +83,7 @@ function createTable(block, name, path) {
         td.setAttribute('colspan', maxCols);
       }
       td.innerHTML = col.innerHTML;
+      td.style.color = 'red';
       tr.append(td);
     });
     table.append(tr);
@@ -96,7 +97,7 @@ function createMetadataTable(headSection, path) {
   const validMetaMap = {
     template: 'Template', 'og:title': 'Title', description: 'Description', 'og:image': 'Image', author: 'Author', 'article:tag': 'Tags', 'publication-date': 'Publication Date', 'read-time': 'Read Time',
   };
-  // stuff relevant template meta tags into array
+  // stuff relevant template meta tags into array.
   const metadataArray = [];
   headSection.querySelectorAll('meta').forEach((row) => {
     const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
@@ -117,15 +118,13 @@ function createMetadataTable(headSection, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols, align: 'left', background-color: 'red' }, 'metadata'));
-  //headerRow.style.backgroundColor = blockHeaderBGColor;
-  //headerRow.backgroundColor = blockHeaderBGColor;
+  headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, 'metadata'));
+  headerRow.style.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
     tdName.innerText = row.attrib;
-    tdName.style.color = 'red';
     tr.append(tdName);
     const tdValue = document.createElement('td');
     tdValue.innerText = row.value;
