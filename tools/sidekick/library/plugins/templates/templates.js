@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 import { createElement, createCopy } from '../utils/utils.js';
 
 const blockHeaderBGColor = '#f4cccd';
@@ -95,7 +94,7 @@ function createMetadataTable(headSection, path) {
   const validMetaMap = {
     template: 'Template', 'og:title': 'Title', description: 'Description', 'og:image': 'Image', author: 'Author', 'article:tag': 'Tags', 'publication-date': 'Publication Date', 'read-time': 'Read Time',
   };
-  // stuff relevant template meta tags into array
+  // stuff relevant template meta tags into array.
   const metadataArray = [];
   headSection.querySelectorAll('meta').forEach((row) => {
     const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
