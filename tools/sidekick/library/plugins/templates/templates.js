@@ -70,7 +70,7 @@ function createTable(block, name, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols, align: 'left'  }, name));
+  headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, name));
   headerRow.style.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
   rows.forEach((row) => {
@@ -95,40 +95,38 @@ function createMetadataTable(headSection, path) {
     template: 'Template', 'og:title': 'Title', description: 'Description', 'og:image': 'Image', author: 'Author', 'article:tag': 'Tags', 'publication-date': 'Publication Date', 'read-time': 'Read Time',
   };
   // stuff relevant template meta tags into array
-  let metadataArray = new Array();
+  const metadataArray = [];
   headSection.querySelectorAll('meta').forEach((row) => {
     const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
     const metaTagValue = validMetaMap[headMetaTag];
     if (metaTagValue !== undefined) {
-      const metaObj = { 'attrib':metaTagValue, 'value':row.getAttribute('content') }; 
+      const metaObj = { attrib: metaTagValue, value: row.getAttribute('content') };
       metadataArray.push(metaObj);
     }
   });
   // resolve duplicates
-  const compactedMetaArray = Array.from(new Set(metadataArray.map(set => set.attrib)))
-  .map(attrib => {
-    return {
-      attrib: attrib,
-      value: metadataArray.filter(set => set.attrib === attrib).map(attrib => attrib.value).join(', ')
-    }
-  });
+  const compactedMetaArray = Array.from(new Set(metadataArray.map((set) => set.attrib)))
+    .map((attrib) => ({
+      attrib,
+      value: metadataArray.filter((set) => set.attrib === attrib).map((attribute) => attribute.value).join(', '),
+    }));
 
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols, align: 'left'  }, 'metadata'));
+  headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, 'metadata'));
   headerRow.style.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
-      const tr = document.createElement('tr');
-      const tdName = document.createElement('td');
-      tdName.innerText = row.attrib;
-      tr.append(tdName);
-      const tdValue = document.createElement('td');
-      tdValue.innerText = row.value;
-      tr.append(tdValue);
-      table.append(tr);
+    const tr = document.createElement('tr');
+    const tdName = document.createElement('td');
+    tdName.innerText = row.attrib;
+    tr.append(tdName);
+    const tdValue = document.createElement('td');
+    tdValue.innerText = row.value;
+    tr.append(tdValue);
+    table.append(tr);
   });
 
   return table.outerHTML;
