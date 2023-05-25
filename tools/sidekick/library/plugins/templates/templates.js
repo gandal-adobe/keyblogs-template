@@ -119,9 +119,8 @@ function createMetadataTable(headSection, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.style.backgroundColor = 'blue';
-  headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, 'metadata'));
-  headerRow.append(createTag('th', { colspan: maxCols, style: 'text-align:left, background-color:orange;' }, name));
+  //headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, 'metadata'));
+  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color:orange;' }, metadata));
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
     const tr = document.createElement('tr');
