@@ -30,13 +30,7 @@ export async function fetchTemplate(path) {
 
 function createTag(tag, attributes = {}, html = undefined) {
   const el = document.createElement(tag);
-  if (html) {
-    if (html instanceof HTMLElement || html instanceof SVGElement) {
-      el.append(html);
-    } else {
-      el.insertAdjacentHTML('beforeend', html);
-    }
-  }
+
   if (attributes) {
     Object.entries(attributes).forEach(([key, val]) => {
       el.setAttribute(key, val);
