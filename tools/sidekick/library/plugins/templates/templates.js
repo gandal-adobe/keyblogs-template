@@ -91,6 +91,17 @@ function createMetadataTable(headSection, path) {
   const validMetaMap = {
     template: 'Template', 'og:title': 'Title', description: 'Description', 'og:image': 'Image', author: 'Author', 'article:tag': 'Tags', 'publication-date': 'Publication Date', 'read-time': 'Read Time',
   };
+  let metadataArray = new Array();
+  headSection.querySelectorAll('meta').forEach((row) => {
+    const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
+    const metaTagValue = validMetaMap[headMetaTag];
+    if (metaTagValue !== undefined) {
+      const metaObj = { metaTagValue : row.getAttribute('content') }; 
+      metadataArray.push(metaObj);
+    }
+  });
+  console.log(metadataArray);
+
   const maxCols = 2;
   const table = document.createElement('table');
   table.setAttribute('border', 1);
