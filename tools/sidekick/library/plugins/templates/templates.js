@@ -72,7 +72,7 @@ function createTable(block, name, path) {
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
   headerRow.style.backgroundColor = blockHeaderBGColor;
-  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color : #f4cccd;' }, name));
+  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color : rgba(255, 99, 71, 0.5)' }, name));
   //headerRow.style.backgroundColor = blockHeaderBGColor;
   //headerRow.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
@@ -122,7 +122,7 @@ function createMetadataTable(headSection, path) {
   headerRow.style.backgroundColor = 'blue';
   headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, 'metadata'));
   //headerRow.append(createTag('th', { colspan: maxCols, style: 'text-align:left, background-color :' + blockHeaderBGColor }, name));
-  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color : #f4cccd, align=left' }, name));
+  headerRow.append(createTag('th', { colspan: maxCols, style: 'align = left, background-color : rgba(255, 99, 71, 0.5)' }, name));
   headerRow.style.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
