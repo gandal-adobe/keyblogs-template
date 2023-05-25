@@ -83,7 +83,7 @@ function createTable(block, name, path) {
         td.setAttribute('colspan', maxCols);
       }
       td.innerHTML = col.innerHTML;
-      td.style.color = 'red';
+      td.style.backgroundColor = 'red';
       tr.append(td);
     });
     table.append(tr);
