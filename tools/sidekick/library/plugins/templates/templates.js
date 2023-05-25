@@ -72,7 +72,7 @@ function createTable(block, name, path) {
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
   headerRow.style.backgroundColor = blockHeaderBGColor;
-  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color : #f4cccd' }, name));
+  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color : #f4cccd;' }, name));
   //headerRow.style.backgroundColor = blockHeaderBGColor;
   //headerRow.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
