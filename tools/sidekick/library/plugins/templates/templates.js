@@ -44,7 +44,7 @@ function createTag(tag, attributes = {}, html = undefined) {
       el.setAttribute(key, val);
     });
   }
-  //el.style.color = 'blue';
+  el.style.backgroundColor = 'orange';
   return el;
 }
 
