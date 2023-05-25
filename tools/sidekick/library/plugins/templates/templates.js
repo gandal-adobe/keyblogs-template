@@ -71,9 +71,9 @@ function createTable(block, name, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols, align: 'left' }, name));
-  headerRow.style.backgroundColor = blockHeaderBGColor;
-  headerRow.backgroundColor = blockHeaderBGColor;
+  headerRow.append(createTag('th', { colspan: maxCols, align: 'left', backgroundColor: blockHeaderBGColor }, name));
+  //headerRow.style.backgroundColor = blockHeaderBGColor;
+  //headerRow.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
   rows.forEach((row) => {
     const tr = document.createElement('tr');
@@ -83,6 +83,7 @@ function createTable(block, name, path) {
         td.setAttribute('colspan', maxCols);
       }
       td.innerHTML = col.innerHTML;
+      td.
       tr.append(td);
     });
     table.append(tr);
