@@ -11,6 +11,8 @@
  */
 import { createElement, createCopy } from '../utils/utils.js';
 
+const blockHeaderBGColor = '#f4cccd';
+
 export async function fetchTemplate(path) {
   if (!window.templates) {
     window.templates = {};
@@ -69,6 +71,7 @@ function createTable(block, name, path) {
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
   headerRow.append(createTag('th', { colspan: maxCols, align: 'left'  }, name));
+  headerRow.style.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
   rows.forEach((row) => {
     const tr = document.createElement('tr');
@@ -115,7 +118,7 @@ function createMetadataTable(headSection, path) {
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
   headerRow.append(createTag('th', { colspan: maxCols, align: 'left'  }, 'metadata'));
-  headerRow.style.backgroundColor = '#f4cccd';
+  headerRow.style.backgroundColor = blockHeaderBGColor;
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
       const tr = document.createElement('tr');
