@@ -115,22 +115,15 @@ function createMetadataTable(headSection, path) {
   const headerRow = document.createElement('tr');
   headerRow.append(createTag('th', { colspan: maxCols }, 'metadata'));
   table.append(headerRow);
-  headSection.querySelectorAll('meta').forEach((row) => {
-    const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
-    const metaTagValue = validMetaMap[headMetaTag];
-    if (metaTagValue !== undefined) {
+  compactedMetaArray.forEach((row) => {
       const tr = document.createElement('tr');
       const tdName = document.createElement('td');
-      tdName.innerText = metaTagValue;
+      tdName.innerText = row.attrib;
       tr.append(tdName);
       const tdValue = document.createElement('td');
-      tdValue.innerText = row.getAttribute('content');
-      if (metaTagValue === 'Tags') {
-        tdValue.innerText = tdValue.innerText.replace(';', ',');
-      }
+      tdValue.innerText = row.value;
       tr.append(tdValue);
       table.append(tr);
-    }
   });
 
   return table.outerHTML;
