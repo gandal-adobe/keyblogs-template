@@ -96,7 +96,7 @@ function createMetadataTable(headSection, path) {
     const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
     const metaTagValue = validMetaMap[headMetaTag];
     if (metaTagValue !== undefined) {
-      const metaObj = { 'attrib':metaTagValue, 'data':row.getAttribute('content') }; 
+      const metaObj = { 'attrib':metaTagValue, 'value':row.getAttribute('content') }; 
       metadataArray.push(metaObj);
     }
   });
