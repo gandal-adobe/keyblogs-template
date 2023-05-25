@@ -30,7 +30,13 @@ export async function fetchTemplate(path) {
 
 function createTag(tag, attributes = {}, html = undefined) {
   const el = document.createElement(tag);
-
+  if (html) {
+    if (html instanceof HTMLElement || html instanceof SVGElement) {
+      el.append(html);
+    } else {
+      el.insertAdjacentHTML('beforeend', html);
+    }
+  }
   if (attributes) {
     Object.entries(attributes).forEach(([key, val]) => {
       el.setAttribute(key, val);
@@ -73,7 +79,6 @@ function createTable(block, name, path) {
         td.setAttribute('colspan', maxCols);
       }
       td.innerHTML = col.innerHTML;
-      td.style.backgroundColor = 'red';
       tr.append(td);
     });
     table.append(tr);
@@ -87,7 +92,7 @@ function createMetadataTable(headSection, path) {
   const validMetaMap = {
     template: 'Template', 'og:title': 'Title', description: 'Description', 'og:image': 'Image', author: 'Author', 'article:tag': 'Tags', 'publication-date': 'Publication Date', 'read-time': 'Read Time',
   };
-  // stuff relevant template meta tags into array.
+  // stuff relevant template meta tags into array
   const metadataArray = [];
   headSection.querySelectorAll('meta').forEach((row) => {
     const headMetaTag = row.getAttributeNames()[0] === 'property' ? row.getAttribute('property') : row.getAttribute('name');
@@ -108,8 +113,7 @@ function createMetadataTable(headSection, path) {
   const table = document.createElement('table');
   table.setAttribute('border', 1);
   const headerRow = document.createElement('tr');
-  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color:#f4cccd; text-align: start' }, 'metadata'));
-  //headerRow.style.align = 'left';
+  headerRow.append(createTag('th', { colspan: maxCols, style: 'background-color:#f4cccd;' }, 'metadata'));
   table.append(headerRow);
   compactedMetaArray.forEach((row) => {
     const tr = document.createElement('tr');
