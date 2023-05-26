@@ -118,7 +118,7 @@ function createMetadataTable(headSection, path) {
   compactedMetaArray.forEach((row) => {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
-    if (tdName==='Image') {
+    if (row.attrib === 'Image') {
       const oImg = document.createElement("img");
       oImg.setAttribute('src', './media_1ef6dc0451417f0118cd08d562cb759030fed8040.png');
       oImg.setAttribute('alt', '<replace with your hero image>');
