@@ -139,9 +139,9 @@ function createSection(section, path) {
       output = output.concat(createTable(row, blockName, path));
     } else if (row.nodeName === 'H1') {
       // add font-size to post title and h1 title
-      row.setAttribute('style','color:blue; font-size: 40px;');
+      row.setAttribute('style','color:blue; font-size: 20px;');
       output = output.concat(row.outerHTML);
-      output = output.replace('<p>',"<p style='color:blue; font-size: 2.0em;'>");
+      output = output.replace('<p>',"<p style='color:blue; font-size: 36px;'>");
     } else {
       output = output.concat(row.outerHTML);
     }
