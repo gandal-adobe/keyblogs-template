@@ -143,6 +143,7 @@ function createSection(section, path) {
       row.setAttribute('font-size','30');
       previousRow.setAttribute('style','font-weight:800; color:red; font-size:24;');
       output = output.concat(row.outerHTML);
+      output = output.concat(row.outerHTML).replace('<p',"<p style='color:red;'");
     } else {
       output = output.concat(row.outerHTML);
     }
