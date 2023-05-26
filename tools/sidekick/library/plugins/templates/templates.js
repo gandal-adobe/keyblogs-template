@@ -139,11 +139,9 @@ function createSection(section, path) {
       output = output.concat(createTable(row, blockName, path));
     } else if (row.nodeName === 'H1') {
       // add font-size to post title and h1 title
-      row.setAttribute('style','font-weight:800; color:red; font-size: 2.0em;');
-      //row.setAttribute('font-size','30');
-      //previousRow.setAttribute('style','font-weight:800; color:red; font-size: 2.0em;');
+      row.setAttribute('style','color:blue; font-size: 2.0em;');
       output = output.concat(row.outerHTML);
-      output = output.replace('<p',"<p style='color:red; font-size: 2.0em;'");
+      output = output.replace('<p>',"<p style='font-size: 2.0em;'>");
     } else {
       output = output.concat(row.outerHTML);
     }
