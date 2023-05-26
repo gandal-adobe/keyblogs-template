@@ -118,7 +118,11 @@ function createMetadataTable(headSection, path) {
   compactedMetaArray.forEach((row) => {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
-    tdName.innerText = row.attrib;
+    if (tdName==='Image') {
+      tdName.innerText = "<picture><img loading='lazy' alt='' type='image/png' src='https://main--keyblogs--gandal-adobe.hlx.page/tools/sidekick/templates/%3Creplace%20with%20your%20hero%20image%3E?width=1200&format=pjpg&optimize=medium width='566' height='412'></picture>&#x3C;replace with your hero image>";
+    } else {
+      tdName.innerText = row.attrib;
+    }
     tr.append(tdName);
     const tdValue = document.createElement('td');
     tdValue.innerText = row.value;
