@@ -123,7 +123,7 @@ function createMetadataTable(headSection, path) {
     const tdValue = document.createElement('td');
     if (row.attrib === 'Image') {
       const oImg = document.createElement("img");
-      oImg.setAttribute('src', './media_1ef6dc0451417f0118cd08d562cb759030fed8040.png');
+      oImg.setAttribute('src', 'https://main--blogs-keysight--hlxsites.hlx.page/block-library/templates/media_110be40889e2176c09e36ef4c3ce1b3ad82eaa7d3.png?format=webply&optimize=medium');
       oImg.setAttribute('alt', '<replace with your hero image>');
       oImg.width = '566';
       oImg.height = '412';
