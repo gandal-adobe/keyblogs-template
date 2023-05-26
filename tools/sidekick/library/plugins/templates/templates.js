@@ -118,20 +118,20 @@ function createMetadataTable(headSection, path) {
   compactedMetaArray.forEach((row) => {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
+    tdName.innerText = row.attrib;
+    tr.append(tdName);
+    const tdValue = document.createElement('td');
     if (row.attrib === 'Image') {
       const oImg = document.createElement("img");
       oImg.setAttribute('src', './media_1ef6dc0451417f0118cd08d562cb759030fed8040.png');
       oImg.setAttribute('alt', '<replace with your hero image>');
       oImg.width = '566';
       oImg.height = '412';
-      tdName.appendChild(oImg);
+      tdValue.appendChild(oImg);
       //tdName.img = "<picture><img loading='lazy' alt='' type='image/png' src='https://main--keyblogs--gandal-adobe.hlx.page/tools/sidekick/templates/%3Creplace%20with%20your%20hero%20image%3E?width=1200&format=pjpg&optimize=medium width='566' height='412'></picture>&#x3C;replace with your hero image>";
     } else {
-      tdName.innerText = row.attrib;
+      tdValue.innerText = row.value;
     }
-    tr.append(tdName);
-    const tdValue = document.createElement('td');
-    tdValue.innerText = row.value;
     tr.append(tdValue);
     table.append(tr);
   });
