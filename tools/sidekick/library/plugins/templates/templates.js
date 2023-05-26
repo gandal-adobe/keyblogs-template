@@ -129,7 +129,7 @@ function createMetadataTable(headSection, path) {
       oImg.width = '280';
       oImg.height = '200';
       tdValue.appendChild(oImg);
-      tdValue.innerText = '<replace with your hero image>';
+      tdValue.appendChild(document.createTextNode('<replace with your hero image>'));
       //tdName.img = "<picture><img loading='lazy' alt='' type='image/png' src='https://main--keyblogs--gandal-adobe.hlx.page/tools/sidekick/templates/%3Creplace%20with%20your%20hero%20image%3E?width=1200&format=pjpg&optimize=medium width='566' height='412'></picture>&#x3C;replace with your hero image>";
     } else {
       tdValue.innerText = row.value;
