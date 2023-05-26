@@ -118,14 +118,14 @@ function createMetadataTable(headSection, path) {
   compactedMetaArray.forEach((row) => {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
-    if (row.attrib === 'Image') {
-      tdName.innerText = "<picture><source type='image/png' srcset='./media_1ef6dc0451417f0118cd08d562cb759030fed8040.png?width=2000&amp;format=webply&amp;optimize=medium' media='(min-width: 600px)'><img loading='lazy' alt='' type='image/png' src='./media_1ef6dc0451417f0118cd08d562cb759030fed8040.png' optimize=medium width='566' height='412'></picture>";
-    } else {
-      tdName.innerText = row.attrib;
-    }
     tr.append(tdName);
     const tdValue = document.createElement('td');
-    tdValue.innerText = row.value;
+    if (row.attrib === 'Image') {
+      tdValue.innerHTML = "<picture><source type='image/png' srcset='./media_1ef6dc0451417f0118cd08d562cb759030fed8040.png?width=2000&amp;format=webply&amp;optimize=medium' media='(min-width: 600px)'><img loading='lazy' alt='' type='image/png' src='./media_1ef6dc0451417f0118cd08d562cb759030fed8040.png' optimize=medium width='566' height='412'></picture>";
+    } else {
+      tdValue.innerText = row.value;
+    }
+    //tdValue.innerText = row.value;
     tr.append(tdValue);
     table.append(tr);
   });
