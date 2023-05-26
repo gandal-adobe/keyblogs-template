@@ -132,20 +132,22 @@ function createMetadataTable(headSection, path) {
 function createSection(section, path) {
   decorateImages(section, path);
   let output = '';
-  let previousRow = null;
   [...section.children].forEach((row) => {
     if (row.nodeName === 'DIV') {
       const blockName = row.classList[0];
       output = output.concat(createTable(row, blockName, path));
     } else if (row.nodeName === 'H1') {
-      // add font-size to post title and h1 title
+      // add font-size and text color to blog post title and h1 element
       row.setAttribute('style','color:blue; font-size: 20px;');
       output = output.concat(row.outerHTML);
-      output = output.replace('<p>',"<p style='color:blue; font-size: 36px;'>");
+      output = output.replace('<p>',"<p style='font-size: 36px;'>");
+    } else if (row.nodeName === 'H2') {
+      // add font-size to h2 element
+      row.setAttribute('style','color:black; font-size: 20px;');
+      output = output.concat(row.outerHTML);
     } else {
       output = output.concat(row.outerHTML);
     }
-    previousRow = row;
   });
   return output;
 }
