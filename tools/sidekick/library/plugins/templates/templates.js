@@ -155,6 +155,7 @@ function createSection(section, path) {
     } else {
       output = output.concat(row.outerHTML);
     }
+    previousRow = row;
   });
   return output;
 }
