@@ -86,6 +86,16 @@ function createTable(block, name, path) {
   return table.outerHTML;
 }
 
+function createImgElement(src, width, height) {
+  const imgEl = document.createElement('img');
+  imgEl.setAttribute('src', src);
+  imgEl.setAttribute('alt', '<replace with your hero image>');
+  imgEl.loading = 'lazy';
+  imgEl.width = width;
+  imgEl.height = height;
+  return imgEl;
+}
+
 function createMetadataTable(headSection, path) {
   decorateImages(headSection, path);
   // meta tags to include and their docx translation
@@ -122,15 +132,10 @@ function createMetadataTable(headSection, path) {
     tr.append(tdName);
     const tdValue = document.createElement('td');
     if (row.attrib === 'Image') {
-      const oImg = document.createElement("img");
-      oImg.setAttribute('src', 'https://main--blogs-keysight--hlxsites.hlx.page/block-library/templates/media_110be40889e2176c09e36ef4c3ce1b3ad82eaa7d3.png?optimize=medium');
-      oImg.setAttribute('alt', '<replace with your hero image>');
-      oImg.loading = 'lazy'
-      oImg.width = '280';
-      oImg.height = '200';
-      tdValue.appendChild(oImg);
+      // use this image url to avoid 404
+      const templateImgUrl = 'https://main--blogs-keysight--hlxsites.hlx.page/block-library/templates/media_110be40889e2176c09e36ef4c3ce1b3ad82eaa7d3.png?optimize=medium';
+      tdValue.appendChild(createImgElement(templateImgUrl, '280', '200'));
       tdValue.appendChild(document.createTextNode('<replace with your hero image>'));
-      //tdName.img = "<picture><img loading='lazy' alt='' type='image/png' src='https://main--keyblogs--gandal-adobe.hlx.page/tools/sidekick/templates/%3Creplace%20with%20your%20hero%20image%3E?width=1200&format=pjpg&optimize=medium width='566' height='412'></picture>&#x3C;replace with your hero image>";
     } else {
       tdValue.innerText = row.value;
     }
@@ -150,12 +155,12 @@ function createSection(section, path) {
       output = output.concat(createTable(row, blockName, path));
     } else if (row.nodeName === 'H1') {
       // add font-size and text color to blog post title and h1 element
-      row.setAttribute('style','color:blue; font-size: 20px;');
+      row.setAttribute('style', 'color:blue; font-size: 20px;');
       output = output.concat(row.outerHTML);
-      output = output.replace('<p>',"<p style='font-size: 36px;'>");
+      output = output.replace('<p>', "<p style='font-size: 36px;'>");
     } else if (row.nodeName === 'H2') {
       // add font-size to h2 element
-      row.setAttribute('style','color:black; font-size: 20px;');
+      row.setAttribute('style', 'color:black; font-size: 20px;');
       output = output.concat(row.outerHTML);
     } else {
       output = output.concat(row.outerHTML);
