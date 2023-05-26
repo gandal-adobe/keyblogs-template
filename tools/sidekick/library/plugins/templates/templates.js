@@ -126,9 +126,10 @@ function createMetadataTable(headSection, path) {
       oImg.setAttribute('src', 'https://main--blogs-keysight--hlxsites.hlx.page/block-library/templates/media_110be40889e2176c09e36ef4c3ce1b3ad82eaa7d3.png?optimize=medium');
       oImg.setAttribute('alt', '<replace with your hero image>');
       oImg.loading = 'lazy'
-      oImg.width = '452';
-      oImg.height = '330';
+      oImg.width = '280';
+      oImg.height = '200';
       tdValue.appendChild(oImg);
+      tdValue.innerText = '<replace with your hero image>';
       //tdName.img = "<picture><img loading='lazy' alt='' type='image/png' src='https://main--keyblogs--gandal-adobe.hlx.page/tools/sidekick/templates/%3Creplace%20with%20your%20hero%20image%3E?width=1200&format=pjpg&optimize=medium width='566' height='412'></picture>&#x3C;replace with your hero image>";
     } else {
       tdValue.innerText = row.value;
