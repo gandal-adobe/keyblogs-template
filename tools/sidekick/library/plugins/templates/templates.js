@@ -121,7 +121,7 @@ function createMetadataTable(headSection, path) {
     tr.append(tdName);
     const tdValue = document.createElement('td');
     if (row.attrib === 'Image') {
-      tdValue.innerHTML = "<picture><source type='image/png' srcset='./media_1ef6dc0451417f0118cd08d562cb759030fed8040.png?width=2000&amp;format=webply&amp;optimize=medium' media='(min-width: 600px)'><img loading='lazy' alt='' type='image/png' src='./media_1ef6dc0451417f0118cd08d562cb759030fed8040.png' optimize=medium width='566' height='412'></picture>";
+      tdValue.innerHTML = "<picture><img loading='lazy' alt='' type='image/png' src='./media_1ef6dc0451417f0118cd08d562cb759030fed8040.png' optimize=medium width='566' height='412'></picture>";
     } else {
       tdValue.innerText = row.value;
     }
