@@ -119,7 +119,7 @@ function createMetadataTable(headSection, path) {
     const tr = document.createElement('tr');
     const tdName = document.createElement('td');
     if (row.attrib === 'Image') {
-      tdName.innerText = "<picture><img loading='lazy' alt='' type='image/png' src='https://main--keyblogs--gandal-adobe.hlx.page/tools/sidekick/templates/%3Creplace%20with%20your%20hero%20image%3E?width=1200&format=pjpg&optimize=medium width='566' height='412'></picture>&#x3C;replace with your hero image>";
+      tdName.innerText = "<picture><img loading='lazy' alt='' type='image/png' src='./media_1ef6dc0451417f0118cd08d562cb759030fed8040.png' optimize=medium width='566' height='412'></picture>&#x3C;replace with your hero image>";
     } else {
       tdName.innerText = row.attrib;
     }
