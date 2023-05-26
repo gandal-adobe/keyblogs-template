@@ -132,21 +132,26 @@ function createMetadataTable(headSection, path) {
 function createSection(section, path) {
   decorateImages(section, path);
   let output = '';
+  let previousRow = null;
   [...section.children].forEach((row) => {
     if (row.nodeName === 'DIV') {
       const blockName = row.classList[0];
       // add font-size to post title and h1 title
-      let previousN = null;
-      [...row.children].forEach(n => {
-          if (n instanceof HTMLHeadingElement) {
-              n.setAttribute('style','font-size:20;');
-              previousN.setAttribute('style','font-size:24;');
-              console.log(n);
-              console.log(previousN);
-          }
-          previousN = n;
-        })
+      // let previousN = null;
+      // [...row.children].forEach(n => {
+      //     if (n instanceof HTMLHeadingElement) {
+      //         n.setAttribute('style','font-size:20;');
+      //         previousN.setAttribute('style','font-size:24;');
+      //         console.log(n);
+      //         console.log(previousN);
+      //     }
+      //     previousN = n;
+      //   })
       output = output.concat(createTable(row, blockName, path));
+    } else if (row.nodeName === 'H1') {
+      // add font-size to post title and h1 title
+      row.setAttribute('style','font-size:20;');
+      previousRow.setAttribute('style','font-size:24;');
     } else {
       output = output.concat(row.outerHTML);
     }
