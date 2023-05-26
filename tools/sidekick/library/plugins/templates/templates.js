@@ -152,6 +152,7 @@ function createSection(section, path) {
       // add font-size to post title and h1 title
       row.setAttribute('style','font-weight:800; color:red;');
       previousRow.setAttribute('style','font-weight:800; color:blue; font-size:24;');
+      output = output.concat(createTable(row, blockName, path));
     } else {
       output = output.concat(row.outerHTML);
     }
