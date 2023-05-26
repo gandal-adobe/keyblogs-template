@@ -136,21 +136,10 @@ function createSection(section, path) {
   [...section.children].forEach((row) => {
     if (row.nodeName === 'DIV') {
       const blockName = row.classList[0];
-      // add font-size to post title and h1 title
-      // let previousN = null;
-      // [...row.children].forEach(n => {
-      //     if (n instanceof HTMLHeadingElement) {
-      //         n.setAttribute('style','font-size:20;');
-      //         previousN.setAttribute('style','font-size:24;');
-      //         console.log(n);
-      //         console.log(previousN);
-      //     }
-      //     previousN = n;
-      //   })
       output = output.concat(createTable(row, blockName, path));
     } else if (row.nodeName === 'H1') {
       // add font-size to post title and h1 title
-      row.setAttribute('style','font-weight:800; color:red;');
+      row.setAttribute('style','font-weight:800; color:red; font-size:24;');
       previousRow.setAttribute('style','font-weight:800; color:blue; font-size:24;');
       output = output.concat(row.outerHTML);
     } else {
