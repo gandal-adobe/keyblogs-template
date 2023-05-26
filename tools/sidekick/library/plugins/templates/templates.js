@@ -140,7 +140,8 @@ function createSection(section, path) {
     } else if (row.nodeName === 'H1') {
       // add font-size to post title and h1 title
       row.setAttribute('style','font-weight:800; color:red; font-size:24;');
-      previousRow.setAttribute('style','font-weight:800; color:blue; font-size:24;');
+      row.setAttribute('font-size','30');
+      previousRow.setAttribute('style','font-weight:800; color:red; font-size:24;');
       output = output.concat(row.outerHTML);
     } else {
       output = output.concat(row.outerHTML);
